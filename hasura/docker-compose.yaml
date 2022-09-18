@@ -1,0 +1,22 @@
+version: '3.3'
+services:
+  graphql-engine:
+    image: hasura/graphql-engine:v2.8.2
+    environment:
+      HASURA_GRAPHQL_ADMIN_SECRET: perc
+      HASURA_GRAPHQL_DATABASE_URL: postgresql://postgres:postgrespassword@192.168.100.46:5432/lab_telemetria_db
+      HASURA_GRAPHQL_DEV_MODE: 'true'
+      HASURA_GRAPHQL_ENABLED_LOG_TYPES: startup, http-log, webhook-log, websocket-log,
+        query-log
+      HASURA_GRAPHQL_ENABLE_CONSOLE: 'true'
+      HASURA_GRAPHQL_ENABLE_TELEMETRY: 'true'
+      HASURA_GRAPHQL_METADATA_DATABASE_URL: postgresql://postgres:postgrespassword@192.168.100.46:5432/postgres
+    ports:
+     - 8090:8080
+    networks:
+     - swarmpit_net
+    logging:
+      driver: json-file
+networks:
+  swarmpit_net:
+    driver: overlay

@@ -1,0 +1,17 @@
+version: '3.3'
+services:
+  register-module:
+    image: iot-module-register:latest
+    environment:
+      VITE_API_STANDARDIZATION: http://192.168.100.46:8082/v1
+      VITE_HASURA_ENDPOINT: http://192.168.100.46:8090/v1/graphql
+      VITE_HASURA_SECRET: perc
+    ports:
+     - 3000:3000
+    networks:
+     - swarmpit_net
+    logging:
+      driver: json-file
+networks:
+  swarmpit_net:
+    driver: overlay
